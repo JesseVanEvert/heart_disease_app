@@ -62,7 +62,7 @@ st.write('Vervolgens moet je de API importeren zoals hieronder:')
 
 
 st.code('from kaggle.api.kaggle_api_extended import KaggleApi', language='python')
-from kaggle.api.kaggle_api_extended import KaggleApi
+#from kaggle.api.kaggle_api_extended import KaggleApi
 
 
 # In[ ]:
@@ -77,8 +77,8 @@ st.write('Nadat de API is geïmporteerd kennen we deze toe aan een variabele. '
 
 st.code('api = KaggleApi()', language='python')
 st.code('api.authenticate()', language='python')
-api = KaggleApi()
-api.authenticate()
+#api = KaggleApi()
+#api.authenticate()
 
 
 # In[ ]:
@@ -259,6 +259,7 @@ fig.set_xticklabels(labels=['Has heart disease', "Doesn't have heart disease"], 
 plt.title("Heart Disease values")
 plt.ylabel("Amount");
 #st.pyplot(fig)
+st.write('Dont forget the plot here')
 
 
 #     #Van de gehele dataset is er geen groot verschil tussen wel of geen hartziekte hebben. 
@@ -332,11 +333,11 @@ st.write('Age distribution plot')
 
 
 #create a distribution plot with normal distribution curve
-sns.displot( x = 'age', data = heart_disease_df, bins = 30, kde = True)
+fig = sns.displot( x = 'age', data = heart_disease_df, bins = 30, kde = True)
 skewness=str(heart_disease_df["age"].skew())
 kurtosis=str(heart_disease_df["age"].kurt())
 plt.legend([skewness,kurtosis],title=("skewness and kurtosis"))
-st.plotly_chart(plt)
+st.pyplot(fig)
 
 
 #     # Er is een leeftijd verdelig te zien
@@ -359,17 +360,21 @@ st.write('Max. Heart rate distribution plot')
 # In[26]:
 
 
-sns.displot(x = 'thalach', data = heart_disease_df, bins = 30, kde = True, color = 'chocolate')
+fig = sns.displot(x = 'thalach', data = heart_disease_df, bins = 30, kde = True, color = 'chocolate')
 skewness=str(heart_disease_df["thalach"].skew())
 kurtosis=str(heart_disease_df["thalach"].kurt())
 plt.legend([skewness,kurtosis],title=("skewness and kurtosis"))
-st.plotly_chart(plt)
+st.pyplot(fig)
 
 
 #     # Er is een maximale hartslagverdeling te zien 
 #     # De data is niet normaal verdeeld, dit is de zien aan de scheve verdeling (skewness)
 
-# ### Heatmap
+# In[ ]:
+
+
+st.header('Heatmap')
+
 
 # In[27]:
 
@@ -378,18 +383,27 @@ corr = heart_disease_df.corr()
 mask = np.triu(np.ones_like(corr, dtype=bool))
 f, ax = plt.subplots(figsize=(11, 9))
 cmap = sns.diverging_palette(230, 20, as_cmap=True)
-sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
+fig = sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5}, annot = True);
+st.pyplot(fig)
 
 
 #     # Er is een heatmap te zien, waar je de correlaties tussen de verschillende categorien kunt bekijken. 
 #     # als voorbeeld, de Chest pain (CP) en Target heeft de grootste correlatie van 0.43
 
-# ### 5.1  Slider
+# In[ ]:
 
-# ### Cholesterol and Target
 
-# In[28]:
+st.header('5.1  Slider')
+
+
+# In[ ]:
+
+
+st.write('Cholesterol and Target')
+
+
+# In[2]:
 
 
 fig = px.box(heart_disease_df, y='chol', x= 'target', 
@@ -413,14 +427,18 @@ fig.update_layout({'sliders':sliders})
 fig.update_layout({'xaxis':{'title':{'text':'Target'}}})
 fig.update_layout({'yaxis':{'title':{'text':'Chol, (>200 concern)'}}})
 fig.update_layout({'title':{'text':'High cholesterol leads to heart disease distribution'}})
-fig.show()
+st.plotly_chart(fig)
 
 
 #     # Cholesterol gehalte >200 mg/dl kan leiden tot een hartziekte
 #     # Uit deze visualisatie laat ziet dat alleen een te hoge cholesterol gehalte niet altijd lijdt tot hartziekte
 #     # Hier kunnen geen verdere uitspraken gedaan worden, en zou er verdere onderzoek gedaan moeten worden. 
 
-# ### Resting blood pressure, OK and Concern
+# In[ ]:
+
+
+st.write('Resting blood pressure, OK and Concern')
+
 
 # In[29]:
 
@@ -446,7 +464,7 @@ fig.update_layout({'sliders':sliders})
 fig.update_layout({'xaxis':{'title':{'text':'Target'}}})
 fig.update_layout({'yaxis':{'title':{'text':'trestbps, (>130 concern)'}}})
 fig.update_layout({'title':{'text':'High resting blood pressure leads to heart disease distribution'}})
-fig.show()
+st.plotly_chart(fig)
 
 
 #     # Resting blood pressure  > 130 kan leiden tot een hartziekte (concern)
