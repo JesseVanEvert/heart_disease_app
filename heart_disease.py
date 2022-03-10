@@ -258,8 +258,9 @@ fig = heart_disease_df.target.value_counts().plot(kind = 'bar', color=["lightblu
 fig.set_xticklabels(labels=['Has heart disease', "Doesn't have heart disease"], rotation=0);
 plt.title("Heart Disease values")
 plt.ylabel("Amount");
+#Werkt nog niet
+#st.bar_chart(heart_disease_df.value_counts())
 #st.pyplot(fig)
-st.write('Dont forget the plot here')
 
 
 #     #Van de gehele dataset is er geen groot verschil tussen wel of geen hartziekte hebben. 
@@ -312,12 +313,11 @@ st.write(pd.crosstab(heart_disease_df.target, heart_disease_df.sex))
 
 
 #visualizing in countplot
-fig = sns.countplot(x = 'target', data = heart_disease_df, hue = 'sex', color= 'pink')
-fig.set_xticklabels(labels=["Doesn't have heart disease", 'Has heart disease'], rotation=0)
+fig = plt.figure()
+sns.countplot(x = 'target', data = heart_disease_df, hue = 'sex', color= 'pink')
 plt.legend(['Female', 'Male'])
 plt.title("Heart Disease Frequency for Sex");
-#st.pyplot(fig)
-st.write('Dont forget this plot')
+st.pyplot(fig)
 
 
 #     # Onderscheid maken tussen wel en geen hartziektes, man/vrouw. 
@@ -382,12 +382,11 @@ st.header('Heatmap')
 
 corr = heart_disease_df.corr()
 mask = np.triu(np.ones_like(corr, dtype=bool))
-f, ax = plt.subplots(figsize=(11, 9))
+fig, ax = plt.subplots(figsize=(11, 9))
 cmap = sns.diverging_palette(230, 20, as_cmap=True)
-fig = sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
+sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5}, annot = True);
-#st.pyplot(fig)
-st.write('Dont forget this plot')
+st.pyplot(fig)
 
 
 #     # Er is een heatmap te zien, waar je de correlaties tussen de verschillende categorien kunt bekijken. 
