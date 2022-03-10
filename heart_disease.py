@@ -11,8 +11,6 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.express as px
 import streamlit as st
-import requests
-import json
 
 
 # In[ ]:
@@ -317,7 +315,7 @@ fig = sns.countplot(x = 'target', data = heart_disease_df, hue = 'sex', color= '
 fig.set_xticklabels(labels=["Doesn't have heart disease", 'Has heart disease'], rotation=0)
 plt.legend(['Female', 'Male'])
 plt.title("Heart Disease Frequency for Sex");
-st.plotly_chart(fig)
+st.pyplot(fig)
 
 
 #     # Onderscheid maken tussen wel en geen hartziektes, man/vrouw. 
