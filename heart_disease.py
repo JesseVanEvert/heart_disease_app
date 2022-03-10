@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.express as px
 import streamlit as st
+import io
 
 
 # In[ ]:
@@ -40,8 +41,7 @@ st.write('2. DATA')
 st.write('3. Exploratory Data Analysis and Understanding the problem')
 st.write('4. Data Analysis')
 st.write('5. Cleaning dataset')
-st.write('6. Modeling')
-st.write('7. Evaluation')
+st.write('6. Evaluation')
 
 
 # In[ ]:
@@ -191,7 +191,7 @@ st.dataframe(heart_disease_df_rename)
 # In[ ]:
 
 
-st.header('4. Exploratory Data Analysis and Understanding the problem')
+st.header('4. Verkenende data analyse en het probleem begrijpen')
 
 
 # In[ ]:
@@ -216,7 +216,11 @@ st.write('Beknopte samenvatting van de dataset')
 
 
 #concise summary of our dataset.
-st.write(heart_disease_df.info())
+buffer = io.StringIO()
+heart_disease_df.info(buf=buffer)
+s = buffer.getvalue()
+#st.dataframe(heart_disease_df.info())
+st.text(s)
 
 
 # In[ ]:
@@ -241,7 +245,7 @@ st.header('5. Data Analysis')
 # In[ ]:
 
 
-st.write('How many people have heart disease or no heart disease')
+st.write('Hoeveel mensen hebben er een hartziekte')
 
 
 # In[19]:
@@ -269,7 +273,7 @@ plt.ylabel("Amount");
 # In[ ]:
 
 
-st.write('How many Male/Female are in the dataset')
+st.write('Hoeveel mannen/vrouwen zijn er in de dataset')
 
 
 # In[21]:
@@ -298,7 +302,7 @@ st.pyplot(fig1)
 # In[ ]:
 
 
-st.write('People of which sex has the most heart disease')
+st.write('Welk geslacht heeft er meer last van hartziektes')
 
 
 # In[23]:
@@ -327,7 +331,7 @@ st.pyplot(fig)
 # In[ ]:
 
 
-st.write('Age distribution plot')
+st.write('Leeftijdsverdeling')
 
 
 # In[25]:
@@ -355,7 +359,7 @@ st.pyplot(fig)
 # In[ ]:
 
 
-st.write('Max. Heart rate distribution plot')
+st.write('Maximale hartslag verdelingsplot')
 
 
 # In[26]:
@@ -401,7 +405,7 @@ st.header('5.1  Slider')
 # In[ ]:
 
 
-st.write('Cholesterol and Target')
+st.write('Cholesterol en hartziekte')
 
 
 # In[2]:
@@ -528,13 +532,13 @@ st.write('Cholesterol gehalte gepaard met Bloeddruk')
 # In[ ]:
 
 
-st.write('Chest pain and Age')
+st.write('Borstpijn en leeftijd')
 
 
 # In[30]:
 
 
-fig = px.box(heart_disease_df, y='age', x= 'cp', title= 'Chestpain versus age, Boxplot + checkbox ', 
+fig = px.box(heart_disease_df, y='age', x= 'cp', title= 'Borstpijn vs leeftijd, Boxplot + checkbox ',
             points="all", color='cp')
 fig.update_layout(width = 800, boxgroupgap = 0.2, boxgap = 0.8)
 fig.update_xaxes(categoryorder='array')
@@ -560,13 +564,13 @@ st.header('5.3 Dropdown')
 # In[ ]:
 
 
-st.header('5.3.1 Percentage calculations')
+st.header('5.3.1 Percentage berekeningen')
 
 
 # In[ ]:
 
 
-st.write('Percentage Male/Female')
+st.write('Percentage man/vrouw')
 
 
 # In[31]:
@@ -609,7 +613,7 @@ st.dataframe(Gender_df_pct)
 # In[ ]:
 
 
-st.write('Percentage male and female chest pain type')
+st.write('Percentage man en vrouw borstpijn type')
 
 
 # In[36]:
@@ -725,7 +729,7 @@ st.dataframe(cp_df_pct)
 # In[ ]:
 
 
-st.write('Percentage male/female below and above 200 mg/ml chol')
+st.write('Percentage man/vrouw onder en boven 200 mg/ml cholestrol')
 
 
 # In[45]:
@@ -884,20 +888,21 @@ st.write(rbp_df_pct)
 
 
 # 0= female 1= male
-df_10 = pd.DataFrame({
+df_dropdown = pd.DataFrame({
     'Sex': ['female','male'],
     'CP_type_0': [27, 73],
     'CP_type_1': [34, 66],
     'CP_type_2': [38, 62],
     'CP_type_3': [17, 83],
-    
+
     'Chol_OK': [14, 18],
     'Chol_concern': [86, 82],
-    
+
     'rbp_OK': [36, 48],
     'rbp_concern': [64, 52]
 })
-st.dataframe(df_10)
+
+st.dataframe(df_dropdown)
 
 
 # In[ ]:
@@ -909,28 +914,26 @@ st.write('Dropdown')
 # In[62]:
 
 
-fig = go.Figure()
+fig6 = go.Figure()
 
 
 # In[63]:
 
 
 # Add surface trace
-fig.add_trace(go.Bar(y=df_10['CP_type_0'], name = 'Chest pain type 0'))
-fig.add_trace(go.Bar(y=df_10['CP_type_1'], name = 'Chest pain type 1'))
-fig.add_trace(go.Bar(y=df_10['CP_type_2'], name = 'Chest pain type 2'))
-fig.add_trace(go.Bar(y=df_10['CP_type_3'], name = 'Chest pain type 3'))
+fig6.add_trace(go.Bar(y=df_dropdown['CP_type_0'], x=df_dropdown['Sex'], name = 'Chest pain type 0'))
+fig6.add_trace(go.Bar(y=df_dropdown['CP_type_1'], x=df_dropdown['Sex'], name = 'Chest pain type 1'))
+fig6.add_trace(go.Bar(y=df_dropdown['CP_type_2'], x=df_dropdown['Sex'], name = 'Chest pain type 2'))
+fig6.add_trace(go.Bar(y=df_dropdown['CP_type_3'], x=df_dropdown['Sex'], name = 'Chest pain type 3'))
 
-fig.add_trace(go.Bar(y=df_10['Chol_OK'], name = 'Cholesterol OK'))
-fig.add_trace(go.Bar(y=df_10['Chol_concern'], name = 'Cholesterol concern'))
+fig6.add_trace(go.Bar(y=df_dropdown['Chol_OK'], x=df_dropdown['Sex'], name = 'Cholesterol OK'))
+fig6.add_trace(go.Bar(y=df_dropdown['Chol_concern'], x=df_dropdown['Sex'], name = 'Cholesterol concern'))
 
-fig.add_trace(go.Bar(y=df_10['rbp_OK'], name = 'Bloodpressure OK'))
-fig.add_trace(go.Bar(y=df_10['rbp_concern'], name = 'Bloodpressur concern'))
-                             
-fig.update_layout({'yaxis': {'title':{'text': 'Percentage'}}})
-fig.update_layout({'title':{'text': 'Looking at heart disease through CP, Chol and rbp'}})
+fig6.add_trace(go.Bar(y=df_dropdown['rbp_OK'], x=df_dropdown['Sex'], name = 'Bloodpressure OK'))
+fig6.add_trace(go.Bar(y=df_dropdown['rbp_concern'], x=df_dropdown['Sex'], name = 'Bloodpressur concern'))
 
-st.plotly_chart(fig)
+fig6.update_layout({'yaxis': {'title':{'text': 'Percentage'}}})
+fig6.update_layout({'title':{'text': 'Looking at heart disease through CP, Chol and rbp'}})
 
 
 # In[64]:
@@ -956,26 +959,38 @@ dropdown_heart_disease = [
 # In[ ]:
 
 
+fig6.update_layout({'updatemenus':[{'type':'dropdown',
+                                   'x': 1.3,'y': 1.1,
+                                   'showactive': True,
+                                   'active':0,
+                                   'buttons':dropdown_heart_disease}]})
+
+st.plotly_chart(fig6)
+
+
+# In[ ]:
+
+
 st.header('6. Cleaning Dataset')
 
 
 # In[107]:
 
 
-st.write(heart_disease_df.isna().sum())
+st.write(heart_disease_df_rename.isna().sum())
 
 
 # In[ ]:
 
 
-st.write('There are no null values')
+st.write('Er zijn geen null waarden')
 
 
 # In[116]:
 
 
-heart_disease_df.drop(['slope', 'oldpeak', 'exang', 'ca', 'thal', 'fbs'], axis=1)
-st.dataframe(heart_disease_df)
+heart_disease_df_rename.drop(['FBP', 'R.ECG', 'EIA', 'Oldpeak', 'Slope', 'N.mv', 'TSL'], axis=1)
+st.dataframe(heart_disease_df_rename)
 
 
 # In[ ]:
@@ -983,7 +998,3 @@ st.dataframe(heart_disease_df)
 
 st.write('Kolomen gedropt die we niet gebruikt hebben.')
 
-
-# ## 7. Modeling
-
-# ## 8. Evaluation
