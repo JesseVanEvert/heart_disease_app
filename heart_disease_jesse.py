@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[47]:
+# In[58]:
 
 
 import pandas as pd
@@ -9,13 +9,13 @@ import plotly.express as px
 import streamlit as st
 
 
-# In[ ]:
+# In[59]:
 
 
 st.title('API')
 
 
-# In[ ]:
+# In[60]:
 
 
 st.write('Eerst moet kaggle worden geïnstalleerd met de command: pip install kaggle')
@@ -23,44 +23,57 @@ st.write('Daarna moet er een API token worden gedownload van kaggle; deze token 
 st.write('Vervolgens moet je de API importeren zoals hieronder.')
 
 
-# In[48]:
+# In[61]:
 
 
+st.code('from kaggle.api.kaggle_api_extended import KaggleApi', language='python')
 from kaggle.api.kaggle_api_extended import KaggleApi
 
 
-# ###### Nadat de API is geïmporteerd kennen we deze toe aan een variabele. Daarna voeren we authenticate() uit want je moet geauthenticeert zijn voordat je data kan binnenhalen.
-
-# In[49]:
+# In[62]:
 
 
+st.write('Nadat de API is geïmporteerd kennen we deze toe aan een variabele. Daarna voeren we authenticate() uit want je moet geauthenticeert zijn voordat je data kan binnenhalen.')
+
+
+# In[63]:
+
+
+st.code('api = KaggleApi()', language='python')
+st.code('api.authenticate()', language='python')
 api = KaggleApi()
 api.authenticate()
 
 
-# ###### Na de voorstaande stappen te hebben uitgevoerd kunnen we een dataset downloaden via de API op de onderstaande manier.
-
-# In[50]:
+# In[64]:
 
 
+st.write('Na de voorstaande stappen te hebben uitgevoerd kunnen we een dataset downloaden via de API op de onderstaande manier.')
+
+
+# In[65]:
+
+
+st.code("api.dataset_download_file('johnsmith88/heart-disease-dataset', file_name='heart.csv')", language='python')
 #api.dataset_download_file('johnsmith88/heart-disease-dataset', file_name='heart.csv')
 
 
 # ## Data verkenning
 
-# In[51]:
+# In[66]:
 
 
 heart_disease_df = pd.read_csv('heart.csv')
 
 
-# In[52]:
+# In[67]:
 
 
 heart_disease_df.head()
+st.dataframe(heart_disease_df.head())
 
 
-# In[53]:
+# In[68]:
 
 
 heart_disease_df.describe()
@@ -85,16 +98,34 @@ heart_disease_df.describe()
 
 # ### Slider
 
-# In[54]:
+# In[69]:
 
 
-chol_pressure_df = heart_disease_df[['chol', 'thalach', 'age', 'sex']]
+chol_pressure_df = heart_disease_df[['chol', 'thalach', 'age', 'sex', 'target']]
 chol_pressure_df.age = pd.to_numeric(chol_pressure_df.age)
-chol_pressure_df.sort_values(['age'], ascending=True)
-fig = px.scatter(chol_pressure_df, x="chol", y="thalach", animation_frame="age", animation_group="sex",
-            color="sex", hover_name="sex",
-           log_x=True, size_max=55)
+chol_pressure_df['sex'] = chol_pressure_df['sex'].astype(int)
+sorted_chol = chol_pressure_df.sort_values(['age'], ascending=True)
+#heart_disease_df = heart_disease_df.sort_values(['age'], ascending=True)
 
-fig["layout"].pop("updatemenus") 
-fig.show()
+
+# In[73]:
+
+
+fig = px.scatter(sorted_chol, x="chol", y="thalach",
+                 animation_frame="age",
+                 color="sex",)
+
+fig["layout"].pop("updatemenus")
+st.plotly_chart(fig)
+
+
+# In[72]:
+
+
+fig = px.scatter(heart_disease_df, x="chol", y="thalach",
+                 animation_frame="age",
+                 color="sex",)
+
+fig["layout"].pop("updatemenus")
+st.plotly_chart(fig)
 
