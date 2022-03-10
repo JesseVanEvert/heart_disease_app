@@ -41,13 +41,12 @@ st.write('2. DATA')
 st.write('3. Exploratory Data Analysis and Understanding the problem')
 st.write('4. Data Analysis')
 st.write('5. Cleaning dataset')
-st.write('6. Evaluation')
 
 
 # In[8]:
 
 
-st.header('Kaggle API')
+st.header('1. Kaggle API')
 
 
 # In[9]:
@@ -97,7 +96,7 @@ st.code("api.dataset_download_file('johnsmith88/heart-disease-dataset', file_nam
 # In[15]:
 
 
-st.header('3. Data')
+st.header('2. Data')
 
 
 # In[16]:
@@ -191,7 +190,7 @@ st.dataframe(heart_disease_df_rename)
 # In[23]:
 
 
-st.header('4. Verkenende data analyse en het probleem begrijpen')
+st.header('3. Verkenende data analyse en het probleem begrijpen')
 
 
 # In[24]:
@@ -239,7 +238,7 @@ st.write(heart_disease_df.describe().T)
 # In[30]:
 
 
-st.header('5. Data Analysis')
+st.header('4. Data Analysis')
 
 
 # In[31]:
@@ -380,7 +379,7 @@ st.pyplot(fig)
 # In[44]:
 
 
-st.header('5.1  Slider')
+st.header('4.1  Slider')
 
 
 # In[45]:
@@ -493,7 +492,7 @@ st.plotly_chart(fig)
 # In[51]:
 
 
-st.header('5.2 Checkbox')
+st.header('4.2 Checkbox')
 
 
 # In[ ]:
@@ -620,7 +619,7 @@ st.plotly_chart(fig)
 # In[60]:
 
 
-st.header('5.3 Dropdown')
+st.header('4.3 Dropdown')
 
 
 # ### Dropdown dataframe
@@ -714,7 +713,7 @@ st.plotly_chart(fig6)
 # In[102]:
 
 
-st.header('6. Cleaning Dataset')
+st.header('5. Cleaning Dataset')
 
 
 # In[103]:
