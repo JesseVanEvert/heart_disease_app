@@ -316,7 +316,8 @@ fig = sns.countplot(x = 'target', data = heart_disease_df, hue = 'sex', color= '
 fig.set_xticklabels(labels=["Doesn't have heart disease", 'Has heart disease'], rotation=0)
 plt.legend(['Female', 'Male'])
 plt.title("Heart Disease Frequency for Sex");
-st.pyplot(fig)
+#st.pyplot(fig)
+st.write('Dont forget this plot')
 
 
 #     # Onderscheid maken tussen wel en geen hartziektes, man/vrouw. 
@@ -385,7 +386,8 @@ f, ax = plt.subplots(figsize=(11, 9))
 cmap = sns.diverging_palette(230, 20, as_cmap=True)
 fig = sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5}, annot = True);
-st.pyplot(fig)
+#st.pyplot(fig)
+st.write('Dont forget this plot')
 
 
 #     # Er is een heatmap te zien, waar je de correlaties tussen de verschillende categorien kunt bekijken. 
@@ -472,7 +474,11 @@ st.plotly_chart(fig)
 #     # Hier kunnen geen verdere uitspraken gedaan worden, en zou er verdere onderzoek gedaan moeten worden, 
 #     bijv combinaties met andere categorien
 
-# ### Target and CP 
+# In[ ]:
+
+
+st.write('Target and CP')
+
 
 # In[112]:
 
@@ -497,12 +503,20 @@ fig.update_layout({'sliders':sliders})
 fig.update_layout({'xaxis':{'title':{'text':'Target'}}})
 fig.update_layout({'yaxis':{'title':{'text':'Age'}}})
 fig.update_layout({'title':{'text':'Age vs Target vs Chestpain distribution'}})
-fig.show()
+st.plotly_chart(fig)
 
 
-# ### 5.2 Checkbox 
+# In[ ]:
 
-# ### Cholesterol gehalte gepaard met Bloeddruk
+
+st.header('5.2 Checkbox')
+
+
+# In[ ]:
+
+
+st.write('Cholesterol gehalte gepaard met Bloeddruk')
+
 
 #     # Nadia nog toevoegen
 
@@ -512,7 +526,11 @@ fig.show()
 
 
 
-# ### Chest pain and Age
+# In[ ]:
+
+
+st.write('Chest pain and Age')
+
 
 # In[30]:
 
@@ -521,7 +539,7 @@ fig = px.box(heart_disease_df, y='age', x= 'cp', title= 'Chestpain versus age, B
             points="all", color='cp')
 fig.update_layout(width = 800, boxgroupgap = 0.2, boxgap = 0.8)
 fig.update_xaxes(categoryorder='array')
-fig.show()
+st.plotly_chart(fig)
 
 
 #     # Spreiding van alle leeftijden van de verschillende typen chestpain
@@ -534,16 +552,28 @@ fig.show()
 #     2: Niet-angina-pijn: meestal slokdarmspasmen (niet gerelateerd aan het hart)
 #     3: Asymptomatisch: pijn op de borst die geen tekenen van ziekte vertoont
 
-# ### 5.3 Dropdown
+# In[ ]:
 
-# #### 5.3.1 Percentage calculations 
 
-# #### Percentage Male/Female
+st.header('5.3 Dropdown')
+
+
+# In[ ]:
+
+
+st.header('5.3.1 Percentage calculations')
+
+
+# In[ ]:
+
+
+st.write('Percentage Male/Female')
+
 
 # In[31]:
 
 
-pd.DataFrame(heart_disease_df.sex.value_counts())
+st.write(pd.DataFrame(heart_disease_df.sex.value_counts()))
 
 
 # In[32]:
@@ -552,7 +582,7 @@ pd.DataFrame(heart_disease_df.sex.value_counts())
 Gender_dataframe = pd.DataFrame({'total gender': [1025],
                 'total male': [713],
             'total female': [312]})
-Gender_dataframe 
+st.dataframe(Gender_dataframe)
 
 
 # In[33]:
@@ -565,8 +595,8 @@ Female_df_pct = Gender_dataframe['total female']/Gender_dataframe['total gender'
 # In[34]:
 
 
-print(Male_df_pct)
-print(Female_df_pct)
+st.write(Male_df_pct)
+st.write(Female_df_pct)
 
 
 # In[35]:
@@ -574,15 +604,19 @@ print(Female_df_pct)
 
 Gender_df_pct = pd.DataFrame({'Male': [69.6],
                               'Female': [30.4]})
-Gender_df_pct
+st.dataframe(Gender_df_pct)
 
 
-# #### Percentage male and female chest pain type 
+# In[ ]:
+
+
+st.write('Percentage male and female chest pain type')
+
 
 # In[36]:
 
 
-pd.DataFrame(heart_disease_df.cp.value_counts())
+st.write(pd.DataFrame(heart_disease_df.cp.value_counts()))
 
 
 # In[37]:
@@ -593,7 +627,7 @@ cp_dataframe = pd.DataFrame({'total': [1025],
             'type 1': [167],
                             'type 2': [284],
                             'type 3': [77]})
-cp_dataframe 
+st.dataframe(cp_dataframe)
 
 
 # In[38]:
@@ -637,7 +671,7 @@ cp_sex_dataframe = pd.DataFrame({'total T0': cp_dataframe['type 0'],
                     'male T3': [cp_three_male],
                     'female T3': [cp_three_female]
                                  })
-cp_sex_dataframe 
+st.dataframe(cp_sex_dataframe)
 
 
 # In[42]:
@@ -686,10 +720,14 @@ cp_df_pct = pd.DataFrame({'male type 0': [73.2],
                           
                           'male type 3': [83.1],
                           'female type 3': [16.9]})
-cp_df_pct
+st.dataframe(cp_df_pct)
 
 
-# #### Percentage male/female below and above 200 mg/ml chol 
+# In[ ]:
+
+
+st.write('Percentage male/female below and above 200 mg/ml chol')
+
 
 # In[45]:
 
@@ -716,7 +754,7 @@ chol_sex_dataframe = pd.DataFrame({'male not concern': [below_200_male],
                                   'female not concern': [below_200_female],
                                    'female concern': [above_200_female]
                           })
-chol_sex_dataframe 
+st.dataframe(chol_sex_dataframe)
 
 
 # In[48]:
@@ -747,7 +785,7 @@ chol_df_pct = pd.DataFrame({'chol male not concern': [17.8],
                           'chol female not concern': [14.4],
                           'cholfemale concern': [85.6], 
                           })
-chol_df_pct
+st.dataframe(chol_df_pct)
 
 
 # #### Percentage male/female resting blood pressure below and above 130
@@ -777,7 +815,7 @@ trestbps_sex_dataframe = pd.DataFrame({'rbp male not concern': [below_130_male],
                                   'rbp female not concern': [below_130_female],
                                    'rbp female concern': [above_130_female]
                           })
-trestbps_sex_dataframe 
+st.dataframe(trestbps_sex_dataframe)
 
 
 # In[54]:
@@ -808,33 +846,37 @@ rbp_df_pct = pd.DataFrame({'rbp male not concern': [48.2],
                           'rbp female not concern': [36.2],
                           'rbp female concern': [63.8], 
                           })
-rbp_df_pct
+st.dataframe(rbp_df_pct)
 
 
-# ### Percentages onder elkaar
+# In[ ]:
+
+
+st.write('Percentages onder elkaar')
+
 
 # In[57]:
 
 
-Gender_df_pct
+st.write(Gender_df_pct)
 
 
 # In[58]:
 
 
-cp_df_pct
+st.write(cp_df_pct)
 
 
 # In[59]:
 
 
-chol_df_pct
+st.write(chol_df_pct)
 
 
 # In[60]:
 
 
-rbp_df_pct
+st.write(rbp_df_pct)
 
 
 # ### Dropdown dataframe
@@ -856,10 +898,14 @@ df_10 = pd.DataFrame({
     'rbp_OK': [36, 48],
     'rbp_concern': [64, 52]
 })
-df_10
+st.dataframe(df_10)
 
 
-# ### Dropdown
+# In[ ]:
+
+
+st.write('Dropdown')
+
 
 # In[62]:
 
@@ -885,6 +931,8 @@ fig.add_trace(go.Bar(y=df_10['rbp_concern'], name = 'Bloodpressur concern'))
 fig.update_layout({'yaxis': {'title':{'text': 'Percentage'}}})
 fig.update_layout({'title':{'text': 'Looking at heart disease through CP, Chol and rbp'}})
 
+st.plotly_chart(fig)
+
 
 # In[64]:
 
@@ -904,26 +952,38 @@ dropdown_heart_disease = [
 {'label': 'Bloodpressure concern', 'method':'update','args': [{'visible':[False, False, False, False, False, False, False, True]},{'title':'Bloodpressure concern >130'}]},
 
 ]
- 
 
 
-# ## 6. Cleaning Dataset
+# In[ ]:
+
+
+st.header('6. Cleaning Dataset')
+
 
 # In[107]:
 
 
-heart_disease_df.isna().sum()
+st.write(heart_disease_df.isna().sum())
 
 
-# ##there are no null values
+# In[ ]:
+
+
+st.write('There are no null values')
+
 
 # In[116]:
 
 
 heart_disease_df.drop(['slope', 'oldpeak', 'exang', 'ca', 'thal', 'fbs'], axis=1)
+st.dataframe(heart_disease_df)
 
 
-# ####kolomen gedropt die we niet gebruikt hebben.
+# In[ ]:
+
+
+st.write('Kolomen gedropt die we niet gebruikt hebben.')
+
 
 # ## 7. Modeling
 
