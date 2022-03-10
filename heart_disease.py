@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[4]:
 
 
 import pandas as pd
@@ -14,7 +14,7 @@ import streamlit as st
 import io
 
 
-# In[ ]:
+# In[5]:
 
 
 st.title('Heart disease')
@@ -27,13 +27,13 @@ st.title('Heart disease')
 #     Groep: nr 3
 # 
 
-# In[ ]:
+# In[6]:
 
 
 st.header('Steps')
 
 
-# In[ ]:
+# In[7]:
 
 
 st.write('1. Kaggle API')
@@ -44,13 +44,13 @@ st.write('5. Cleaning dataset')
 st.write('6. Evaluation')
 
 
-# In[ ]:
+# In[8]:
 
 
 st.header('Kaggle API')
 
 
-# In[ ]:
+# In[9]:
 
 
 st.write('Eerst moet kaggle worden geïnstalleerd met de command: pip install kaggle.')
@@ -58,21 +58,21 @@ st.write('Daarna moet er een API token worden gedownload van kaggle; deze token 
 st.write('Vervolgens moet je de API importeren zoals hieronder:')
 
 
-# In[7]:
+# In[10]:
 
 
 st.code('from kaggle.api.kaggle_api_extended import KaggleApi', language='python')
 #from kaggle.api.kaggle_api_extended import KaggleApi
 
 
-# In[ ]:
+# In[11]:
 
 
 st.write('Nadat de API is geïmporteerd kennen we deze toe aan een variabele. '
          'Daarna voeren we authenticate() uit want je moet geauthenticeert zijn voordat je data kan binnenhalen.')
 
 
-# In[8]:
+# In[12]:
 
 
 st.code('api = KaggleApi()', language='python')
@@ -81,50 +81,50 @@ st.code('api.authenticate()', language='python')
 #api.authenticate()
 
 
-# In[ ]:
+# In[13]:
 
 
 st.write('Na de voorstaande stappen te hebben uitgevoerd kunnen we een dataset downloaden via de API op de onderstaande manier:')
 
 
-# In[9]:
+# In[14]:
 
 
 st.code("api.dataset_download_file('johnsmith88/heart-disease-dataset', file_name='heart.csv')", language='python')
 #api.dataset_download_file('johnsmith88/heart-disease-dataset', file_name='heart.csv')
 
 
-# In[ ]:
+# In[15]:
 
 
 st.header('3. Data')
 
 
-# In[10]:
+# In[16]:
 
 
 heart_disease_df = pd.read_csv('heart.csv')
 
 
-# In[11]:
+# In[17]:
 
 
 heart_disease_df_rename = pd.read_csv('heart.csv')
 
 
-# In[12]:
+# In[18]:
 
 
 st.dataframe(heart_disease_df.head())
 
 
-# In[ ]:
+# In[19]:
 
 
 st.write('De afkorting van sommige kolomen zijn nietszeggend, dus deze gaan we veranderen')
 
 
-# In[13]:
+# In[20]:
 
 
 heart_disease_df_rename.rename(columns={"age": "Age",
@@ -143,7 +143,7 @@ heart_disease_df_rename.rename(columns={"age": "Age",
                                 "target": "Target"},inplace=True)
 
 
-# In[14]:
+# In[21]:
 
 
 heart_disease_df_rename.columns = [['Age', 'Sex', 'CPT', 'RBP', 'S.Chol', 'FBP', 'R.ECG', 'max.HRA', 'EIA', 'Oldpeak', 'Slope', 'N.mv', 'TSL', 'Target'], 
@@ -152,7 +152,7 @@ heart_disease_df_rename.columns = [['Age', 'Sex', 'CPT', 'RBP', 'S.Chol', 'FBP',
 
 
 
-# In[15]:
+# In[22]:
 
 
 st.dataframe(heart_disease_df_rename)
@@ -188,31 +188,31 @@ st.dataframe(heart_disease_df_rename)
 #                                           7= reversable defect: no proper blood movement when excercising
 #     Target	Target Have disease or not	  1 = yes 0 = no
 
-# In[ ]:
+# In[23]:
 
 
 st.header('4. Verkenende data analyse en het probleem begrijpen')
 
 
-# In[ ]:
+# In[24]:
 
 
 st.write('Aantal rijen en aantal kolommen')
 
 
-# In[16]:
+# In[25]:
 
 
 st.write(heart_disease_df.shape)
 
 
-# In[ ]:
+# In[26]:
 
 
 st.write('Beknopte samenvatting van de dataset')
 
 
-# In[17]:
+# In[27]:
 
 
 #concise summary of our dataset.
@@ -223,38 +223,38 @@ s = buffer.getvalue()
 st.text(s)
 
 
-# In[ ]:
+# In[28]:
 
 
 st.write('Statistische beschrijving per kolom')
 
 
-# In[18]:
+# In[29]:
 
 
 #Generating descriptive statistics.
 st.write(heart_disease_df.describe().T)
 
 
-# In[ ]:
+# In[30]:
 
 
 st.header('5. Data Analysis')
 
 
-# In[ ]:
+# In[31]:
 
 
 st.write('Hoeveel mensen hebben er een hartziekte')
 
 
-# In[19]:
+# In[32]:
 
 
 st.write(heart_disease_df.target.value_counts())
 
 
-# In[1]:
+# In[33]:
 
 
 #plotting bar chart.
@@ -270,19 +270,19 @@ plt.ylabel("Amount");
 #     #Van de gehele dataset is er geen groot verschil tussen wel of geen hartziekte hebben. 
 #     #Er zijn wel meer mensen die een hartziekte hebben in het figuur. (blauw) 
 
-# In[ ]:
+# In[34]:
 
 
 st.write('Hoeveel mannen/vrouwen zijn er in de dataset')
 
 
-# In[21]:
+# In[35]:
 
 
 st.write(heart_disease_df.sex.value_counts())
 
 
-# In[22]:
+# In[36]:
 
 
 #visualizing in Pie chart
@@ -299,13 +299,13 @@ st.pyplot(fig1)
 #     #Er zijn meer mannen dan vrouwen aanwezig in de dataset. 
 #     #70% mannen en 30% vrouwen
 
-# In[ ]:
+# In[37]:
 
 
 st.write('Welk geslacht heeft er meer last van hartziektes')
 
 
-# In[23]:
+# In[38]:
 
 
 #Sex; 1= Male, 0=Female
@@ -313,7 +313,7 @@ st.write('Welk geslacht heeft er meer last van hartziektes')
 st.write(pd.crosstab(heart_disease_df.target, heart_disease_df.sex))
 
 
-# In[24]:
+# In[39]:
 
 
 #visualizing in countplot
@@ -328,13 +328,13 @@ st.pyplot(fig)
 #     # Figuur is niet betrouwbaar, er zijn meer mannen aanwezig in de dataset zoals net te zien was in de pie chart. 
 #     # In dropdown wordt dit nog weergegeven in percentages 
 
-# In[ ]:
+# In[40]:
 
 
 st.write('Leeftijdsverdeling')
 
 
-# In[25]:
+# In[41]:
 
 
 #create a distribution plot with normal distribution curve
@@ -356,32 +356,13 @@ st.pyplot(fig)
 # #Kurtosis is a measure of whether the data are heavy-
 # #tailed or light-tailed relative to a normal distribution.
 
-# In[ ]:
-
-
-st.write('Maximale hartslag verdelingsplot')
-
-
-# In[26]:
-
-
-fig = sns.displot(x = 'thalach', data = heart_disease_df, bins = 30, kde = True, color = 'chocolate')
-skewness=str(heart_disease_df["thalach"].skew())
-kurtosis=str(heart_disease_df["thalach"].kurt())
-plt.legend([skewness,kurtosis],title=("skewness and kurtosis"))
-st.pyplot(fig)
-
-
-#     # Er is een maximale hartslagverdeling te zien 
-#     # De data is niet normaal verdeeld, dit is de zien aan de scheve verdeling (skewness)
-
-# In[ ]:
+# In[42]:
 
 
 st.header('Heatmap')
 
 
-# In[27]:
+# In[43]:
 
 
 corr = heart_disease_df.corr()
@@ -396,19 +377,19 @@ st.pyplot(fig)
 #     # Er is een heatmap te zien, waar je de correlaties tussen de verschillende categorien kunt bekijken. 
 #     # als voorbeeld, de Chest pain (CP) en Target heeft de grootste correlatie van 0.43
 
-# In[ ]:
+# In[44]:
 
 
 st.header('5.1  Slider')
 
 
-# In[ ]:
+# In[45]:
 
 
 st.write('Cholesterol en hartziekte')
 
 
-# In[2]:
+# In[46]:
 
 
 fig = px.box(heart_disease_df, y='chol', x= 'target', 
@@ -439,13 +420,13 @@ st.plotly_chart(fig)
 #     # Uit deze visualisatie laat ziet dat alleen een te hoge cholesterol gehalte niet altijd lijdt tot hartziekte
 #     # Hier kunnen geen verdere uitspraken gedaan worden, en zou er verdere onderzoek gedaan moeten worden. 
 
-# In[ ]:
+# In[47]:
 
 
 st.write('Resting blood pressure, OK and Concern')
 
 
-# In[29]:
+# In[48]:
 
 
 fig = px.box(heart_disease_df, y='trestbps', x= 'target', 
@@ -477,13 +458,13 @@ st.plotly_chart(fig)
 #     # Hier kunnen geen verdere uitspraken gedaan worden, en zou er verdere onderzoek gedaan moeten worden, 
 #     bijv combinaties met andere categorien
 
-# In[ ]:
+# In[49]:
 
 
 st.write('Target and CP')
 
 
-# In[112]:
+# In[50]:
 
 
 fig = px.box(heart_disease_df, y='age', x= 'target', color='cp')
@@ -509,7 +490,7 @@ fig.update_layout({'title':{'text':'Age vs Target vs Chestpain distribution'}})
 st.plotly_chart(fig)
 
 
-# In[ ]:
+# In[51]:
 
 
 st.header('5.2 Checkbox')
@@ -521,21 +502,102 @@ st.header('5.2 Checkbox')
 st.write('Cholesterol gehalte gepaard met Bloeddruk')
 
 
-#     # Nadia nog toevoegen
-
-# In[ ]:
+# In[53]:
 
 
 
+chol_above_rbp_above=len(heart_disease_df[(heart_disease_df.chol>200)&(heart_disease_df.trestbps>=130)])
+chol_above_rbp_below=len(heart_disease_df[(heart_disease_df.chol>200)&(heart_disease_df.trestbps<130)])
+chol_below_rbp_below=len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.trestbps<130)])
+chol_below_rbp_above=len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.trestbps>=130)])
+#print(chol_above_rbp_above, chol_above_rbp_below, chol_below_rbp_below, chol_below_rbp_above)
 
 
-# In[ ]:
+# In[54]:
+
+
+chol_above_rbp_above_disease=len(heart_disease_df[(heart_disease_df.chol>200)&(heart_disease_df.trestbps>=130)&(heart_disease_df.target==1)])
+chol_above_rbp_below_disease=len(heart_disease_df[(heart_disease_df.chol>200)&(heart_disease_df.trestbps<130)&(heart_disease_df.target==1)])
+chol_below_rbp_below_disease=len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.trestbps<130)&(heart_disease_df.target==1)])
+chol_below_rbp_above_disease=len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.trestbps>=130)&(heart_disease_df.target==1)])
+#print(chol_above_rbp_above_disease, chol_above_rbp_below_disease, chol_below_rbp_below_disease, chol_below_rbp_above_disease)
+
+
+# In[55]:
+
+
+chol_above_rbp_above_OK=len(heart_disease_df[(heart_disease_df.chol>200)&(heart_disease_df.trestbps>=130)&(heart_disease_df.target==0)])
+chol_above_rbp_below_OK=len(heart_disease_df[(heart_disease_df.chol>200)&(heart_disease_df.trestbps<130)&(heart_disease_df.target==0)])
+chol_below_rbp_below_OK=len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.trestbps<130)&(heart_disease_df.target==0)])
+chol_below_rbp_above_OK=len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.trestbps>=130)&(heart_disease_df.target==0)])
+#print(chol_above_rbp_above_OK, chol_above_rbp_below_OK, chol_below_rbp_below_OK, chol_below_rbp_above_OK)
+
+
+# In[56]:
+
+
+df_chol_rbp_target_ = pd.DataFrame({
+'chol_above_rbp_above': [481],
+'chol_above_rbp_below': [372],
+'chol_below_rbp_below': [85],
+'chol_below_rbp_above': [87],
+'chol_above_rbp_above_disease': [231],
+'chol_above_rbp_below_disease': [196],
+'chol_below_rbp_below_disease': [49],
+'chol_below_rbp_above_disease': [50],
+
+'chol_above_rbp_above_OK': [250],
+'chol_above_rbp_below_OK': [176],
+'chol_below_rbp_below_OK': [36],
+'chol_below_rbp_above_OK': [37],
+'both high': ['both high'],
+'high chol': ['high chol'],
+'both OK' : ['both OK'],
+'high rbp' : ['high rbp'],
+'both high disease': ['both high disease'],
+'high chol disease': ['high chol disease'],
+'both OK disease' : ['both OK disease'],
+'high rbp disease' : ['high rbp disease'],
+
+'both high no disease': ['both high no disease'],
+'high chol no disease': ['high chol no disease'],
+'both OK no disease' : ['both OK no disease'],
+'high rbp no disease' : ['high rbp no disease']
+})
+
+
+# In[57]:
+
+
+fig4 = go.Figure()
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_above_rbp_above'], x=df_chol_rbp_target_['both high'], name = 'both high, leads to heart disease?'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_above_rbp_below'], x=df_chol_rbp_target_['high chol'], name = 'high chol'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_below_rbp_below'], x=df_chol_rbp_target_['both OK'], name = 'both OK, leads to no heart disease?'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_below_rbp_above'], x=df_chol_rbp_target_['high rbp'], name = 'high rbp'))
+
+
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_above_rbp_above_disease'], x=df_chol_rbp_target_['both high disease'], name = 'both high disease'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_above_rbp_below_disease'], x=df_chol_rbp_target_['high chol disease'], name = 'high chol disease'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_below_rbp_below_disease'], x=df_chol_rbp_target_['both OK disease'], name = 'both OK disease'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_below_rbp_above_disease'], x=df_chol_rbp_target_['high rbp disease'], name = 'high rbp disease'))
+
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_above_rbp_above_OK'], x=df_chol_rbp_target_['both high no disease'], name = 'both high no disease'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_above_rbp_below_OK'], x=df_chol_rbp_target_['high chol no disease'], name = 'high chol no disease'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_below_rbp_below_OK'], x=df_chol_rbp_target_['both OK no disease'], name = 'both OK no disease'))
+fig4.add_trace(go.Bar(y=df_chol_rbp_target_['chol_below_rbp_above_OK'], x=df_chol_rbp_target_['high rbp no disease'], name = 'high rbp no disease'))
+
+fig4.update_layout({'yaxis': {'title':{'text': 'People counts'}}})
+fig4.update_layout({'title':{'text': 'Looking at heart disease through Chol, rbp and target'}})
+st.plotly_chart(fig4)
+
+
+# In[58]:
 
 
 st.write('Borstpijn en leeftijd')
 
 
-# In[30]:
+# In[59]:
 
 
 fig = px.box(heart_disease_df, y='age', x= 'cp', title= 'Borstpijn vs leeftijd, Boxplot + checkbox ',
@@ -555,336 +617,15 @@ st.plotly_chart(fig)
 #     2: Niet-angina-pijn: meestal slokdarmspasmen (niet gerelateerd aan het hart)
 #     3: Asymptomatisch: pijn op de borst die geen tekenen van ziekte vertoont
 
-# In[ ]:
+# In[60]:
 
 
 st.header('5.3 Dropdown')
 
 
-# In[ ]:
-
-
-st.header('5.3.1 Percentage berekeningen')
-
-
-# In[ ]:
-
-
-st.write('Percentage man/vrouw')
-
-
-# In[31]:
-
-
-st.write(pd.DataFrame(heart_disease_df.sex.value_counts()))
-
-
-# In[32]:
-
-
-Gender_dataframe = pd.DataFrame({'total gender': [1025],
-                'total male': [713],
-            'total female': [312]})
-st.dataframe(Gender_dataframe)
-
-
-# In[33]:
-
-
-Male_df_pct = Gender_dataframe['total male']/Gender_dataframe['total gender']*100
-Female_df_pct = Gender_dataframe['total female']/Gender_dataframe['total gender']*100
-
-
-# In[34]:
-
-
-st.write(Male_df_pct)
-st.write(Female_df_pct)
-
-
-# In[35]:
-
-
-Gender_df_pct = pd.DataFrame({'Male': [69.6],
-                              'Female': [30.4]})
-st.dataframe(Gender_df_pct)
-
-
-# In[ ]:
-
-
-st.write('Percentage man en vrouw borstpijn type')
-
-
-# In[36]:
-
-
-st.write(pd.DataFrame(heart_disease_df.cp.value_counts()))
-
-
-# In[37]:
-
-
-cp_dataframe = pd.DataFrame({'total': [1025],
-                'type 0': [497],
-            'type 1': [167],
-                            'type 2': [284],
-                            'type 3': [77]})
-st.dataframe(cp_dataframe)
-
-
-# In[38]:
-
-
-cp_zero_male = len(heart_disease_df[(heart_disease_df.cp==0)&(heart_disease_df.sex==1)])
-cp_one_male = len(heart_disease_df[(heart_disease_df.cp==1)&(heart_disease_df.sex==1)])
-cp_two_male = len(heart_disease_df[(heart_disease_df.cp==2)&(heart_disease_df.sex==1)])
-cp_three_male = len(heart_disease_df[(heart_disease_df.cp==3)&(heart_disease_df.sex==1)])
-
-
-# In[39]:
-
-
-cp_zero_female = len(heart_disease_df[(heart_disease_df.cp==0)&(heart_disease_df.sex==0)])
-cp_one_female = len(heart_disease_df[(heart_disease_df.cp==1)&(heart_disease_df.sex==0)])
-cp_two_female = len(heart_disease_df[(heart_disease_df.cp==2)&(heart_disease_df.sex==0)])
-cp_three_female = len(heart_disease_df[(heart_disease_df.cp==3)&(heart_disease_df.sex==0)])
-
-
-# In[40]:
-
-
-print(cp_zero_male, cp_one_male, cp_two_male, cp_three_male)
-print(cp_zero_female, cp_one_female, cp_two_female, cp_three_female)
-
-
-# In[41]:
-
-
-cp_sex_dataframe = pd.DataFrame({'total T0': cp_dataframe['type 0'],
-                                  'male T0': [cp_zero_male],
-                                  'female T0': [cp_zero_female],
-                            'total T1': cp_dataframe['type 1'],
-                            'male T1': [cp_one_male],
-                            'female T1': [cp_one_female],
-                        'total T2': cp_dataframe['type 2'],
-                        'male T2': [cp_two_male],
-                        'female T2': [cp_two_female],
-                    'total T3': cp_dataframe['type 3'],
-                    'male T3': [cp_three_male],
-                    'female T3': [cp_three_female]
-                                 })
-st.dataframe(cp_sex_dataframe)
-
-
-# In[42]:
-
-
-cp0_male_pct = cp_sex_dataframe ['male T0']/cp_sex_dataframe ['total T0']*100
-cp0_female_pct= cp_sex_dataframe ['female T0']/cp_sex_dataframe ['total T0']*100
-
-cp1_male_pct = cp_sex_dataframe ['male T1']/cp_sex_dataframe ['total T1']*100
-cp1_female_pct= cp_sex_dataframe ['female T1']/cp_sex_dataframe ['total T1']*100
-
-cp2_male_pct = cp_sex_dataframe ['male T2']/cp_sex_dataframe ['total T2']*100
-cp2_female_pct= cp_sex_dataframe ['female T2']/cp_sex_dataframe ['total T2']*100
-
-cp3_male_pct = cp_sex_dataframe ['male T3']/cp_sex_dataframe ['total T3']*100
-cp3_female_pct= cp_sex_dataframe ['female T3']/cp_sex_dataframe ['total T3']*100
-
-
-# In[43]:
-
-
-print(cp0_male_pct)
-print(cp0_female_pct)
-
-print(cp1_male_pct)
-print(cp1_female_pct)
-
-print(cp2_male_pct)
-print(cp2_female_pct)
-
-print(cp3_male_pct)
-print(cp3_female_pct)
-
-
-# In[44]:
-
-
-cp_df_pct = pd.DataFrame({'male type 0': [73.2],
-                          'female type 0': [26.8],
-                          
-                          'male type 1': [65.9],
-                          'female type 1': [34.1], 
-                          
-                          'male type 2': [61.6], 
-                          'female type 2': [38.4], 
-                          
-                          'male type 3': [83.1],
-                          'female type 3': [16.9]})
-st.dataframe(cp_df_pct)
-
-
-# In[ ]:
-
-
-st.write('Percentage man/vrouw onder en boven 200 mg/ml cholestrol')
-
-
-# In[45]:
-
-
-below_200_male = len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.sex==1)])
-above_200_male = len(heart_disease_df[(heart_disease_df.chol>200)& (heart_disease_df.sex==1)])
-
-below_200_female = len(heart_disease_df[(heart_disease_df.chol<=200)&(heart_disease_df.sex==0)])
-above_200_female = len(heart_disease_df[(heart_disease_df.chol>200)& (heart_disease_df.sex==0)])
-
-
-# In[46]:
-
-
-print(below_200_male, above_200_male)
-print(below_200_female, above_200_female)
-
-
-# In[47]:
-
-
-chol_sex_dataframe = pd.DataFrame({'male not concern': [below_200_male],
-                                  'male concern': [above_200_male],
-                                  'female not concern': [below_200_female],
-                                   'female concern': [above_200_female]
-                          })
-st.dataframe(chol_sex_dataframe)
-
-
-# In[48]:
-
-
-chol_not_concern_male_pct = chol_sex_dataframe ['male not concern']/Gender_dataframe ['total male']*100
-chol_concern_male_pct= chol_sex_dataframe ['male concern']/Gender_dataframe ['total male']*100
-chol_not_concern_female_pct = chol_sex_dataframe ['female not concern']/Gender_dataframe ['total female']*100
-chol_concern_female_pct= chol_sex_dataframe ['female concern']/Gender_dataframe ['total female']*100
-
-
-# In[49]:
-
-
-print(chol_not_concern_male_pct)
-print(chol_concern_male_pct)
-
-print(chol_not_concern_female_pct)
-print(chol_concern_female_pct)
-
-
-# In[50]:
-
-
-chol_df_pct = pd.DataFrame({'chol male not concern': [17.8],
-                          'chol male concern': [82.2],
-                          
-                          'chol female not concern': [14.4],
-                          'cholfemale concern': [85.6], 
-                          })
-st.dataframe(chol_df_pct)
-
-
-# #### Percentage male/female resting blood pressure below and above 130
-
-# In[51]:
-
-
-below_130_male = len(heart_disease_df[(heart_disease_df.trestbps<130)&(heart_disease_df.sex==1)])
-above_130_male = len(heart_disease_df[(heart_disease_df.trestbps>=130)& (heart_disease_df.sex==1)])
-
-below_130_female = len(heart_disease_df[(heart_disease_df.trestbps<130)&(heart_disease_df.sex==0)])
-above_130_female = len(heart_disease_df[(heart_disease_df.trestbps>=130)& (heart_disease_df.sex==0)])
-
-
-# In[52]:
-
-
-print(below_130_male, above_130_male)
-print(below_130_female, above_130_female)
-
-
-# In[53]:
-
-
-trestbps_sex_dataframe = pd.DataFrame({'rbp male not concern': [below_130_male],
-                                  'rbp male concern': [above_130_male],
-                                  'rbp female not concern': [below_130_female],
-                                   'rbp female concern': [above_130_female]
-                          })
-st.dataframe(trestbps_sex_dataframe)
-
-
-# In[54]:
-
-
-rbp_not_concern_male_pct = trestbps_sex_dataframe ['rbp male not concern']/Gender_dataframe ['total male']*100
-rbp_concern_male_pct= trestbps_sex_dataframe ['rbp male concern']/Gender_dataframe ['total male']*100
-rbp_not_concern_female_pct = trestbps_sex_dataframe ['rbp female not concern']/Gender_dataframe ['total female']*100
-rbp_concern_female_pct= trestbps_sex_dataframe ['rbp female concern']/Gender_dataframe ['total female']*100
-
-
-# In[55]:
-
-
-print(rbp_not_concern_male_pct)
-print(rbp_concern_male_pct)
-
-print(rbp_not_concern_female_pct)
-print(rbp_concern_female_pct)
-
-
-# In[56]:
-
-
-rbp_df_pct = pd.DataFrame({'rbp male not concern': [48.2],
-                          'rbp male concern': [51.8],
-                          
-                          'rbp female not concern': [36.2],
-                          'rbp female concern': [63.8], 
-                          })
-st.dataframe(rbp_df_pct)
-
-
-# In[ ]:
-
-
-st.write('Percentages onder elkaar')
-
-
-# In[57]:
-
-
-st.write(Gender_df_pct)
-
-
-# In[58]:
-
-
-st.write(cp_df_pct)
-
-
-# In[59]:
-
-
-st.write(chol_df_pct)
-
-
-# In[60]:
-
-
-st.write(rbp_df_pct)
-
-
 # ### Dropdown dataframe
 
-# In[61]:
+# In[96]:
 
 
 # 0= female 1= male
@@ -905,19 +646,19 @@ df_dropdown = pd.DataFrame({
 st.dataframe(df_dropdown)
 
 
-# In[ ]:
+# In[97]:
 
 
 st.write('Dropdown')
 
 
-# In[62]:
+# In[98]:
 
 
 fig6 = go.Figure()
 
 
-# In[63]:
+# In[99]:
 
 
 # Add surface trace
@@ -936,27 +677,29 @@ fig6.update_layout({'yaxis': {'title':{'text': 'Percentage'}}})
 fig6.update_layout({'title':{'text': 'Looking at heart disease through CP, Chol and rbp'}})
 
 
-# In[64]:
+# In[100]:
 
 
 dropdown_heart_disease = [
 {'label': 'All categories', 'method':'update','args': [{'visible':[True, True, True, True, True, True, True, True]},{'title':'All categories'}]},
-    
+
+{'label': 'ALL chest pain types', 'method':'update','args': [{'visible':[True, True, True, True, False, False, False, False]},{'title':'Chest pain types'}]},
 {'label': 'chest pain type 0', 'method':'update','args': [{'visible':[True, False, False, False, False, False, False, False]},{'title':'Chest pain type 0'}]},
 {'label': 'chest pain type 1', 'method':'update','args': [{'visible':[False, True, False, False, False, False, False, False]},{'title':'Chest pain type 1'}]},
 {'label': 'chest pain type 2', 'method':'update','args': [{'visible':[False, False, True, False, False, False, False, False]},{'title':'Chest pain type 2'}]},
 {'label': 'chest pain type 3', 'method':'update','args': [{'visible':[False, False, False, True, False, False, False, False]},{'title':'Chest pain type 3'}]},
-                 
+
+{'label': 'Cholesterol', 'method':'update','args': [{'visible':[False, False, False, False, True, True, False, False]},{'title':'Cholesterol'}]},
 {'label': 'Cholesterol OK ', 'method':'update','args': [{'visible':[False, False, False, False, True, False, False, False]},{'title':'Cholesterol OK <200'}]},
 {'label': 'Cholesterol concern', 'method':'update','args': [{'visible':[False, False, False, False, False, True, False, False]},{'title':'Cholesterol concern >200'}]},
-    
+{'label': 'Bloodpressure', 'method':'update','args': [{'visible':[False, False, False, False, False, False, True, True]},{'title':'Bloodpressure'}]},
 {'label': 'Bloodpressure OK', 'method':'update','args': [{'visible':[False, False, False, False, False, False, True, False]},{'title':'Bloodpressure OK <130'}]},
 {'label': 'Bloodpressure concern', 'method':'update','args': [{'visible':[False, False, False, False, False, False, False, True]},{'title':'Bloodpressure concern >130'}]},
 
 ]
 
 
-# In[ ]:
+# In[101]:
 
 
 fig6.update_layout({'updatemenus':[{'type':'dropdown',
@@ -968,32 +711,32 @@ fig6.update_layout({'updatemenus':[{'type':'dropdown',
 st.plotly_chart(fig6)
 
 
-# In[ ]:
+# In[102]:
 
 
 st.header('6. Cleaning Dataset')
 
 
-# In[107]:
+# In[103]:
 
 
 st.write(heart_disease_df_rename.isna().sum())
 
 
-# In[ ]:
+# In[104]:
 
 
 st.write('Er zijn geen null waarden')
 
 
-# In[116]:
+# In[105]:
 
 
 heart_disease_df_rename.drop(['FBP', 'R.ECG', 'EIA', 'Oldpeak', 'Slope', 'N.mv', 'TSL'], axis=1)
 st.dataframe(heart_disease_df_rename)
 
 
-# In[ ]:
+# In[106]:
 
 
 st.write('Kolomen gedropt die we niet gebruikt hebben.')
