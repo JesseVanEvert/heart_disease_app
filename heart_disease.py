@@ -773,8 +773,8 @@ st.write('Er zijn geen null waarden')
 # In[105]:
 
 
-heart_disease_df_rename.drop(['FBP', 'R.ECG', 'EIA', 'Oldpeak', 'Slope', 'N.mv', 'TSL'], axis=1)
-st.dataframe(heart_disease_df_rename)
+heart_disease_df.drop(['slope', 'oldpeak', 'exang', 'ca', 'thal', 'fbs'], axis=1)
+st.dataframe(heart_disease_df)
 
 
 # In[106]:
