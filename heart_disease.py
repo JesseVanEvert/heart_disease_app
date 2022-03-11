@@ -20,6 +20,12 @@ import io
 st.title('Heart disease')
 
 
+# In[ ]:
+
+
+#url to streamlit app: https://share.streamlit.io/jessevanevert/heart_disease_app/main/heart_disease.py
+
+
 #     Namen: Saadia Dif
 #            Jesse van Evert
 #            Sandor Miezenbeek
@@ -651,63 +657,99 @@ st.dataframe(df_dropdown)
 st.write('Dropdown')
 
 
-# In[98]:
-
-
-fig6 = go.Figure()
-
-
 # In[99]:
 
 
+fig7 = go.Figure()
+
 # Add surface trace
-fig6.add_trace(go.Bar(y=df_dropdown['CP_type_0'], x=df_dropdown['Sex'], name = 'Chest pain type 0'))
-fig6.add_trace(go.Bar(y=df_dropdown['CP_type_1'], x=df_dropdown['Sex'], name = 'Chest pain type 1'))
-fig6.add_trace(go.Bar(y=df_dropdown['CP_type_2'], x=df_dropdown['Sex'], name = 'Chest pain type 2'))
-fig6.add_trace(go.Bar(y=df_dropdown['CP_type_3'], x=df_dropdown['Sex'], name = 'Chest pain type 3'))
+fig7.add_trace(go.Bar(y=df_dropdown['CP_type_0'], x=df_dropdown['Sex'], name = 'Chest pain type 0'))
+fig7.add_trace(go.Bar(y=df_dropdown['CP_type_1'], x=df_dropdown['Sex'], name = 'Chest pain type 1'))
+fig7.add_trace(go.Bar(y=df_dropdown['CP_type_2'], x=df_dropdown['Sex'], name = 'Chest pain type 2'))
+fig7.add_trace(go.Bar(y=df_dropdown['CP_type_3'], x=df_dropdown['Sex'], name = 'Chest pain type 3'))
 
-fig6.add_trace(go.Bar(y=df_dropdown['Chol_OK'], x=df_dropdown['Sex'], name = 'Cholesterol OK'))
-fig6.add_trace(go.Bar(y=df_dropdown['Chol_concern'], x=df_dropdown['Sex'], name = 'Cholesterol concern'))
+fig7.add_trace(go.Bar(y=df_dropdown['Chol_OK'], x=df_dropdown['Sex'], name = 'Cholesterol OK'))
+fig7.add_trace(go.Bar(y=df_dropdown['Chol_concern'], x=df_dropdown['Sex'], name = 'Cholesterol concern'))
 
-fig6.add_trace(go.Bar(y=df_dropdown['rbp_OK'], x=df_dropdown['Sex'], name = 'Bloodpressure OK'))
-fig6.add_trace(go.Bar(y=df_dropdown['rbp_concern'], x=df_dropdown['Sex'], name = 'Bloodpressur concern'))
+fig7.add_trace(go.Bar(y=df_dropdown['rbp_OK'], x=df_dropdown['Sex'], name = 'Bloodpressure OK'))
+fig7.add_trace(go.Bar(y=df_dropdown['rbp_concern'], x=df_dropdown['Sex'], name = 'Bloodpressur concern'))
 
-fig6.update_layout({'yaxis': {'title':{'text': 'Percentage'}}})
-fig6.update_layout({'title':{'text': 'Looking at heart disease through CP, Chol and rbp'}})
-
-
-# In[100]:
+fig7.update_layout({'yaxis': {'title':{'text': 'Percentage'}}})
+fig7.update_layout({'title':{'text': 'Looking at heart disease through CP, Chol and rbp'}})
 
 
-dropdown_heart_disease = [
+buttons1 = [
+{'label': 'chest pain types', 'method':'update','args': [{'visible':[True, True, True, True, False, False, False, False]},{'title':'Chest pain types'}]},
+{'label': 'chest pain type 0', 'method':'update','args': [{'visible':[True, False, False, False, False, False, False, False]},{'title':'Chest pain type 0'}]},
+{'label': 'chest pain type 1', 'method':'update','args': [{'visible':[False, True, False, False, False, False, False, False]},{'title':'Chest pain type 1'}]},
+{'label': 'chest pain type 2', 'method':'update','args': [{'visible':[False, False, True, False, False, False, False, False]},{'title':'Chest pain type 2'}]},
+{'label': 'chest pain type 3', 'method':'update','args': [{'visible':[False, False, False, True, False, False, False, False]},{'title':'Chest pain type 3'}]},
+]
+
+buttons2 = [
+{'label': 'Serum Cholesterol', 'method':'update','args': [{'visible':[False, False, False, False, True, True, False, False]},{'title':'Cholesterol'}]},
+{'label': 'Cholesterol OK ', 'method':'update','args': [{'visible':[False, False, False, False, True, False, False, False]},{'title':'Cholesterol OK <200'}]},
+{'label': 'Cholesterol concern', 'method':'update','args': [{'visible':[False, False, False, False, False, True, False, False]},{'title':'Cholesterol concern >200'}]},
+]
+
+buttons3 = [
+{'label': 'Bloodpressure', 'method':'update','args': [{'visible':[False, False, False, False, False, False, True, True]},{'title':'Bloodpressure'}]},
+{'label': 'Bloodpressure OK', 'method':'update','args': [{'visible':[False, False, False, False, False, False, True, False]},{'title':'Bloodpressure OK <130'}]},
+{'label': 'Bloodpressure concern', 'method':'update','args': [{'visible':[False, False, False, False, False, False, False, True]},{'title':'Bloodpressure concern >130'}]},
+]
+
+buttons4 = [
 {'label': 'All categories', 'method':'update','args': [{'visible':[True, True, True, True, True, True, True, True]},{'title':'All categories'}]},
-
 {'label': 'ALL chest pain types', 'method':'update','args': [{'visible':[True, True, True, True, False, False, False, False]},{'title':'Chest pain types'}]},
 {'label': 'chest pain type 0', 'method':'update','args': [{'visible':[True, False, False, False, False, False, False, False]},{'title':'Chest pain type 0'}]},
 {'label': 'chest pain type 1', 'method':'update','args': [{'visible':[False, True, False, False, False, False, False, False]},{'title':'Chest pain type 1'}]},
 {'label': 'chest pain type 2', 'method':'update','args': [{'visible':[False, False, True, False, False, False, False, False]},{'title':'Chest pain type 2'}]},
 {'label': 'chest pain type 3', 'method':'update','args': [{'visible':[False, False, False, True, False, False, False, False]},{'title':'Chest pain type 3'}]},
-
 {'label': 'Cholesterol', 'method':'update','args': [{'visible':[False, False, False, False, True, True, False, False]},{'title':'Cholesterol'}]},
 {'label': 'Cholesterol OK ', 'method':'update','args': [{'visible':[False, False, False, False, True, False, False, False]},{'title':'Cholesterol OK <200'}]},
 {'label': 'Cholesterol concern', 'method':'update','args': [{'visible':[False, False, False, False, False, True, False, False]},{'title':'Cholesterol concern >200'}]},
 {'label': 'Bloodpressure', 'method':'update','args': [{'visible':[False, False, False, False, False, False, True, True]},{'title':'Bloodpressure'}]},
 {'label': 'Bloodpressure OK', 'method':'update','args': [{'visible':[False, False, False, False, False, False, True, False]},{'title':'Bloodpressure OK <130'}]},
 {'label': 'Bloodpressure concern', 'method':'update','args': [{'visible':[False, False, False, False, False, False, False, True]},{'title':'Bloodpressure concern >130'}]},
-
 ]
 
+fig7.update_layout(updatemenus=[dict(active=0,
+                                      buttons=buttons1,
+                                      x=-0.15,
+                                      y=0.8,
+                                    showactive=True,
+                                    xanchor="right"),
 
-# In[101]:
+                                dict(active=0,
+                                     buttons=buttons2,
+                                          x=-0.15,
+                                          y=0.6,
+                                          showactive=True,
+                                    xanchor="right"),
 
+                               dict(active=0,
+                                    buttons=buttons3,
+                                   x=-0.15,
+                                   y=0.4,
+                                   showactive=True,
+                                   xanchor="right"),
 
-fig6.update_layout({'updatemenus':[{'type':'dropdown',
-                                   'x': 1.3,'y': 1.1,
-                                   'showactive': True,
-                                   'active':0,
-                                   'buttons':dropdown_heart_disease}]})
+                               dict(active=0,
+                                    buttons=buttons4,
+                                   x=-0.15,
+                                   y=1.0,
+                                   showactive=True,
+                                   xanchor="right")])
 
-st.plotly_chart(fig6)
+fig7.update_layout(
+    annotations=[
+        dict(text="All 3 categorien:", x=-0.45, xref="paper", y=1.05, yref='paper', align="left", showarrow=False),
+        dict(text="Chest pain type:", x=-0.45, xref="paper", y=0.85, yref="paper", align="left", showarrow=False),
+        dict(text="Cholesterol:", x=-0.45, xref="paper", y=0.63, yref="paper", align="left", showarrow=False),
+        dict(text="Resting bloodpressure:", x=-0.45, xref="paper", y=0.43, yref="paper", align="left", showarrow=False)
+    ])
+
+st.plotly_chart(fig7)
 
 
 # In[102]:
@@ -716,7 +758,7 @@ st.plotly_chart(fig6)
 st.header('5. Cleaning Dataset')
 
 
-# In[103]:
+# In[1]:
 
 
 st.write(heart_disease_df_rename.isna().sum())
